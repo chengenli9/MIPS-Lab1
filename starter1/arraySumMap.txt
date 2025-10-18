@@ -1,0 +1,6 @@
+abc: 64
+abcEnd: 176
+done: 32
+loop: 12
+main: 0
+newline: 176

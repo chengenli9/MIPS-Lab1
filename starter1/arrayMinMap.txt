@@ -1,0 +1,8 @@
+abc: 84
+abcEnd: 196
+done: 52
+loop: 20
+main: 0
+newline: 196
+next: 44
+update: 40

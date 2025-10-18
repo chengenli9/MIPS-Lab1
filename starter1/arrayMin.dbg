@@ -1,0 +1,59 @@
+	.data
+	#### define the array ####
+84:abc: # label for beginning of array
+	# elements in the array
+	.word 30,-3,37,2876,28,7,-4,-73,-72,76
+	.word 4,65,898,225,773,67437,5523,53,2256
+	.word -44,2,77,2,774,2254,5287,222687,3235
+196:abcEnd: # label for end of array
+	
+196:newline:
+	.asciiz "\n"
+	
+	.text
+0:main:		
+	################################################################
+	#  YOUR CODE SHOULD GO HERE
+	################################################################
+
+0#	la $t0, abc 	# pointer to start of array
+4#	la $t3, abcEnd	# pointer to end of array
+	
+8#	lw $t1, 0($t0)	# load the first element into $t1
+12#	move $t2, $t1	# move t1 into t2(current min value)
+
+16#	addi $t0, $t0, 4 # move to next element
+
+20:loop:
+20#	beq $t0, $t3, done # exit if reached end
+24#	lw $t1, 0($t0) # load the current element
+28#	blt $t1, $t2, update # if current < min, update min
+29##...slt $at,$t1,$t2
+33##...bne $at,$zero,40
+
+36#	j next # skip update
+
+40:update:
+40#	move $t2, $t1
+
+44:next: 
+44#	addi $t0, $t0, 4 
+48#	j loop
+
+
+52:done: 
+	# print the sum
+52#	move $a0, $t2
+56#	li $v0, 1
+60#	syscall
+
+	# print newline
+64#	la $a0, newline
+68#	li $v0, 4
+72#	syscall
+
+	# exit program
+76#	li $v0, 10
+80#	syscall
+
+
