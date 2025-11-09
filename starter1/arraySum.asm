@@ -16,18 +16,24 @@ main:
 	#  YOUR CODE SHOULD GO HERE
 	################################################################
 
-	la $t0, abc 	# pointer to start of array
-	la $t3, abcEnd	# pointer to end of array
-	li $t2, 0	# sum = 0
+	# pointer at start of the array
+	la $t0, abc
+	la $t3, abcEnd
+	# keep track of the sum 
+	li $t2, 0
+loop: 
+	# we reach the end of the array when the pointer is null
+	beq $t0, $t3, done
 
-loop:
-	# if starter pointer and END pointer are equal, then go to 'done'
-	beq $t0, $t3, done 
+	lw $t1, 0($t0) # get the value from t0
+	add $t2, $t1, $t2 # add value from t0 to sum
+	addu $t0, 4 # increment pointer 
 
-	lw $t1, 0($t0)	# load current element
-	add $t2, $t2, $t1	# sum += element
-	addi $t0, $t0, 4	# move to next element
-	j loop	# repeat
+	j loop
+
+	
+
+
 
 done: 
 	# print the sum

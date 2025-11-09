@@ -14,25 +14,32 @@ main:
 	################################################################
 	# YOUR CODE GOES HERE
 	################################################################
-	la $t0, myString # address of current character
-
+	la $t0, myString # pointer to first char in string
+	# ascii values start at 'A' 65 --> 'a' 97  (plus 32)
 loop:
-	lb $t1, 0($t0) # load one byte/character
-	beqz $t1, done # if it's 0 we're done
 
-	# check if character is between 'A' (65) and 'Z' (90)
-	li $t2, 65 # 'A'
-	li $t3, 90 # 'Z'
-	blt $t1, $t2, skip # if less than 'A', skip
-	bgt $t1, $t3, skip # if greater than 'Z', skip
+	lb $t1, 0($t0)
+	# stop at end of string
+	beqz $t1, done	
+	# check if value is >= 65 and 90
+	li $s1, 65
+	li $s2, 90
+	blt $t1, $s1, continue
+	bgt $t1, $s2, continue
 
-	# if uppercase, convert to lowercase by adding 32
-	addi $t1, $t1, 32
-	sb $t1, 0($t0) # store back to memory
+	add $t1, $t1, 32
 
-skip: 
-	addi $t0, $t0, 1
+	sb $t1, 0($t0)
+
+
+
+continue:
+	# increment pointer by one byte
+	addu $t0, $t0, 1 
 	j loop
+
+
+
 
 done:
     # print newline

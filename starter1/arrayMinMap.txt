@@ -1,8 +1,7 @@
-abc: 84
-abcEnd: 196
-done: 52
-loop: 20
+abc: 76
+abcEnd: 188
+done: 44
+loop: 12
 main: 0
-newline: 196
-next: 44
-update: 40
+newline: 188
+update: 36

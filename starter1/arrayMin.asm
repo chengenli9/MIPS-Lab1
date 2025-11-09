@@ -16,31 +16,30 @@ main:
 	#  YOUR CODE SHOULD GO HERE
 	################################################################
 
-	la $t0, abc 	# pointer to start of array
-	la $t3, abcEnd	# pointer to end of array
+	la $t0, abc
+	la $t3, abcEnd
+
+	# keep track of current min
+	lw $t2, 0($t0)
 	
-	lw $t1, 0($t0)	# load the first element into $t1
-	move $t2, $t1	# move t1 into t2(current min value)
+loop: 
+	# exit once we have reached the end of array
+	beq $t0, $t3, done
+	
+	lw $t1, 0($t0) # get current value
+	bgt $t1, $t2, update # check if less than
+	addu $t0, 4
 
-	addi $t0, $t0, 4 # move to next element
+	j loop
 
-loop:
-	beq $t0, $t3, done # exit if reached end
-	lw $t1, 0($t0) # load the current element
-	blt $t1, $t2, update # if current < min, update min
 
-	j next # skip update
-
-update:
-	move $t2, $t1
-
-next: 
-	addi $t0, $t0, 4 
+update: 
+	lw $t2, 0($t0)
 	j loop
 
 
 done: 
-	# print the sum
+	# print the min
 	move $a0, $t2
 	li $v0, 1
 	syscall
@@ -53,5 +52,5 @@ done:
 	# exit program
 	li $v0, 10
 	syscall
-
-
+	
+	.data

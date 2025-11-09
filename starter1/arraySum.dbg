@@ -16,18 +16,27 @@
 	#  YOUR CODE SHOULD GO HERE
 	################################################################
 
-0#	la $t0, abc 	# pointer to start of array
-4#	la $t3, abcEnd	# pointer to end of array
-8#	li $t2, 0	# sum = 0
+	# pointer at start of the array
+0#	la $t0, abc
+4#	la $t3, abcEnd
+	# keep track of the sum 
+8#	li $t2, 0
 
-12:loop:
-	# if starter pointer and END pointer are equal, then go to 'done'
-12#	beq $t0, $t3, done 
+12:loop: 
+	# we reach the end of the array when the pointer is null
+12#	beq $t0, $t3, done
 
-16#	lw $t1, 0($t0)	# load current element
-20#	add $t2, $t2, $t1	# sum += element
-24#	addi $t0, $t0, 4	# move to next element
-28#	j loop	# repeat
+16#	lw $t1, 0($t0)
+20#	add $t2, $t1, $t2
+24#	addu $t0, 4 # increment pointer
+
+28#	j loop
+
+	
+	
+
+
+
 
 32:done: 
 	# print the sum

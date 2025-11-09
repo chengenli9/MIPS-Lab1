@@ -1,0 +1,60 @@
+	.text
+0:main:		
+	# prompt user for first number
+0#	li $v0,4 # print string
+4#	la $a0,prompt1
+8#	syscall
+
+	# read first number, putting it into $t0
+12#	li $v0, 5 # read integer
+16#	syscall
+20#	move $t0,$v0
+	
+	# prompt user for second number
+24#	li $v0,4 # print string
+28#	la $a0,prompt2
+32#	syscall
+
+	# read second number, putting it into $t1
+36#	li $v0, 5 # read integer
+40#	syscall
+44#	move $t1,$v0
+	
+	################################################################
+	# YOUR CODE SHOULD GO HERE
+	################################################################
+	
+48#	sub $t2, $t0, $t1 # add whats in t1 and t0 and store it in t2
+
+	# print "The sum is:" followed by integer
+52#	li $v0, 4
+56#	la $a0, resultString
+60#	syscall
+
+	# print the integer 
+64#	li $v0, 1
+68#	move $a0, $t2
+72#	syscall
+
+	# print newline
+76#	li $v0, 4
+80#	la $a0, newline
+84#	syscall
+
+
+	# exit the program
+88#	li $v0,10 # exit
+92#	syscall
+
+	.data
+	.align 2
+96:prompt1:
+	.asciiz "Please type an integer: "
+121:prompt2:
+	.asciiz "Please type another integer: "
+151:resultString:
+	.asciiz "The sum is "
+163:newline:
+	.asciiz "\n"
+
+	

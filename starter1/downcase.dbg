@@ -14,29 +14,36 @@
 	################################################################
 	# YOUR CODE GOES HERE
 	################################################################
-28#	la $t0, myString # address of current character
-
+28#	la $t0, myString # pointer to first char in string
+	# ascii values start at 'A' 65 --> 'a' 97  (plus 32)
 32:loop:
-32#	lb $t1, 0($t0) # load one byte/character
-36#	beqz $t1, done # if it's 0 we're done
 
-	# check if character is between 'A' (65) and 'Z' (90)
-40#	li $t2, 65 # 'A'
-44#	li $t3, 90 # 'Z'
-48#	blt $t1, $t2, skip # if less than 'A', skip
-49##...slt $at,$t1,$t2
+32#	lb $t1, 0($t0)
+	# stop at end of string
+36#	beqz $t1, done	
+	# check if value is >= 65 and 90
+40#	li $s1, 65
+44#	li $s2, 90
+48#	blt $t1, $s1, continue
+49##...slt $at,$t1,$s1
 53##...bne $at,$zero,72
-56#	bgt $t1, $t3, skip # if greater than 'Z', skip
-57##...slt $at,$t3,$t1
+56#	bgt $t1, $s2, continue
+57##...slt $at,$s2,$t1
 61##...bne $at,$zero,72
 
-	# if uppercase, convert to lowercase by adding 32
-64#	addi $t1, $t1, 32
-68#	sb $t1, 0($t0) # store back to memory
+64#	add $t1, $t1, 32
 
-72:skip: 
-72#	addi $t0, $t0, 1
+68#	sb $t1, 0($t0)
+
+
+
+72:continue:
+	# increment pointer by one byte
+72#	addu $t0, $t0, 1 
 76#	j loop
+
+
+
 
 80:done:
     # print newline

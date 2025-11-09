@@ -23,6 +23,24 @@ main:
 	################################################################
 	# YOUR CODE SHOULD GO HERE
 	################################################################
+	
+	add $t2, $t0, $t1 # add whats in t1 and t0 and store it in t2
+
+	# print "The sum is:" followed by integer
+	li $v0, 4
+	la $a0, resultString
+	syscall
+
+	# print the integer 
+	li $v0, 1
+	move $a0, $t2
+	syscall
+
+	# print newline
+	li $v0, 4
+	la $a0, newline
+	syscall
+
 
 	# exit the program
 	li $v0,10 # exit

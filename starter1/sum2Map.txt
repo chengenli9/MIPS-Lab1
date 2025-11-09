@@ -1,0 +1,5 @@
+main: 0
+newline: 163
+prompt1: 96
+prompt2: 121
+resultString: 151
